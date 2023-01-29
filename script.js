@@ -1,5 +1,6 @@
 // ! Method 1
 
+/*
 const userChoiceDisplay = document.getElementById("user_choice");
 const compChoiceDisplay = document.getElementById("comp_choice");
 const resultElDisplay = document.getElementById("result");
@@ -48,6 +49,7 @@ function getResult() {
   }
   resultElDisplay.innerText = result;
 }
+*/
 
 // ! Method 2
 /*
@@ -108,3 +110,63 @@ const getResults = () => {
   }
 };
 */
+
+// ! Method 3
+const resultDisplay = document.querySelector("#result");
+const choicesDisplay = document.querySelector("#choices");
+
+const choices = ["rock", "paper", "scissors"];
+
+const handleClick = (e) => {
+  // passed userChoice , compChoice
+  getResults(
+    e.target.innerHTML,
+    choices[Math.floor(Math.random() * choices.length)]
+  );
+};
+
+choices.forEach((choice) => {
+  const button = document.createElement("button");
+  button.innerHTML = choice;
+  button.addEventListener("click", handleClick);
+  choicesDisplay.appendChild(button);
+});
+
+const getResults = (userChoice, compChoice) => {
+  switch (userChoice + compChoice) {
+    case "scissorpaper":
+    case "rockscissor":
+    case "paperrock":
+      resultDisplay.innerHTML =
+        "You chose : " +
+        userChoice +
+        "  Comp chose : " +
+        compChoice +
+        "  You Win!!";
+      break;
+
+    case "paperscissor":
+    case "scissorrock":
+    case "rockpaper":
+      resultDisplay.innerHTML =
+        "You chose : " +
+        userChoice +
+        "  Comp chose : " +
+        compChoice +
+        "  You Lost!!";
+      break;
+    case "paperpaper":
+    case "scissorscissor":
+    case "rockrock":
+      resultDisplay.innerHTML =
+        "You chose : " +
+        userChoice +
+        "  and Comp chose : " +
+        compChoice +
+        " It's a Draw!";
+      break;
+
+    default:
+      break;
+  }
+};
